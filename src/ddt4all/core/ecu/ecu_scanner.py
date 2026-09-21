@@ -203,7 +203,7 @@ class EcuScanner:
             if 'WRONG' in can_response:
                 self._close_uds_session()
                 return False
-        diagversion = can_response.replace(' ', '')[6:8]
+        diagversion = str(int(can_response.replace(' ', '')[6:8], 16))
 
         # Check supplier ident
         if options.simulation_mode:
@@ -258,7 +258,9 @@ class EcuScanner:
                 self._close_uds_session()
                 return False
 
-        soft = bytes.fromhex(can_response.replace(' ', '')[6:38]).decode("utf8", "ignore")
+        soft = bytes.fromhex(
+            can_response.replace(' ', '')[6:]
+        ).rstrip(b'\x00\xff ').decode("utf8", "ignore")
         # Check soft version
         if options.simulation_mode:
             # Give scanner something to eat...
