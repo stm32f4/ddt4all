@@ -3,7 +3,13 @@ from ddt4all.core.ecu.ecu_database import (
     EcuDatabase,
     doip_addressing
 )
-from ddt4all.core.ecu.ecu_ident import EcuIdent
+from ddt4all.core.ecu.ecu_ident import EcuIdent, clean_ident
+from ddt4all.core.ecu.ecu_compatibility import (
+    CompatibilityLogger,
+    ScannedEcuIdentity,
+    check_in_group,
+    probe_report,
+)
 from ddt4all.core.doip.doip_devices import DoIPDevice
 import ddt4all.core.elm.elm as elm
 import ddt4all.options as options
@@ -19,6 +25,16 @@ class EcuScanner:
         self.num_ecu_found = 0
         self.report_data = []
         self.qapp = None
+        self._reset_compatibility_state()
+
+    def _reset_compatibility_state(self):
+        # Third identification level (checkInGroup / compatibility probe)
+        self.current_project = None
+        self.current_canline = 0
+        self.pending_compatibility = None      # report computed by check_ecu2, probed after identify_*
+        self.compatibility_reports = []        # one CompatibilityReport per unidentified CAN ECU
+        self.compatible_ecus = {}              # user selection, key = target name
+        self._compat_logger = None
 
     def getNumEcuDb(self):
         return self.ecu_database.numecu
@@ -42,6 +58,7 @@ class EcuScanner:
         self.approximate_ecus = {}
         self.num_ecu_found = 0
         self.report_data = []
+        self._reset_compatibility_state()
 
     def identify_old(self, addr, label, force=False):
         if not options.simulation_mode:
@@ -80,6 +97,7 @@ class EcuScanner:
         approximate_ecu = []
         found_exact = False
         found_approximate = False
+        kept_ecu = None
         if addr in self.ecu_database.addr_group_mapping:
             ecu_type = self.ecu_database.addr_group_mapping[addr]
         else:
@@ -116,7 +134,6 @@ class EcuScanner:
         # Try to find the closest possible version of an ECU
         if not found_exact and found_approximate:
             min_delta_version = 0xFFFFFF
-            kept_ecu = None
             for tgt in approximate_ecu:
                 ecu_protocol = 'CAN'
                 if tgt.protocol.startswith("KWP"):
@@ -154,7 +171,8 @@ class EcuScanner:
 
                 options.main_window.logview.append(line)
 
-        if not found_exact and not found_approximate:
+        # Nothing retained: neither exact nor an approximate candidate actually kept
+        if not found_exact and kept_ecu is None:
             text = _("Found ECU")
             text1 = _("(no relevant ECU file found)")
             line = f"<font color='red'>{text} {ecu_type} {text1} :" \
@@ -162,6 +180,64 @@ class EcuScanner:
                    % (diagversion, supplier, soft, version)
 
             options.main_window.logview.append(line)
+
+        # Third level: checkInGroup, only after the exact and approximate
+        # resolutions are complete and nothing was retained. Candidates and
+        # groups are computed here (no bus access); the probe runs from scan()
+        # once identify_new/identify_old closed their identification session.
+        if (not found_exact and kept_ecu is None and protocol == "CAN"
+                and self.current_project and not options.simulation_mode
+                and options.opt_compat_check):
+            self.pending_compatibility = self._prepare_compatibility(
+                diagversion, supplier, soft, version, addr, ecu_type)
+
+    def _prepare_compatibility(self, diagversion, supplier, soft, version, addr, ecu_type):
+        identity = ScannedEcuIdentity(
+            addr=addr, protocol="CAN", diagversion=diagversion, supplier=supplier,
+            soft=soft, version=version, project=self.current_project, canline=self.current_canline)
+        if self._compat_logger is None:
+            self._compat_logger = CompatibilityLogger(options.elm)
+        try:
+            report = check_in_group(identity, self.ecu_database.targets, logger=self._compat_logger)
+        except Exception as e:
+            print(_("Compatibility check error: %s") % e)
+            return None
+        if not report.groups:
+            return None
+        text = _("Compatibility check")
+        line = f"<font color='orange'>{text} {ecu_type} @{addr}: %d " % len(report.groups) \
+               + _("candidate group(s), probing...") + "</font>"
+        options.main_window.logview.append(line)
+        return report
+
+    def _run_pending_compatibility(self):
+        """Probe the groups computed by check_ecu2 for the ECU that just answered."""
+        report = self.pending_compatibility
+        self.pending_compatibility = None
+        if report is None or options.simulation_mode:
+            return
+        try:
+            probe_report(report, options.elm, self._compat_logger)
+        except Exception as e:
+            print(_("Compatibility probe error: %s") % e)
+            return
+        self.compatibility_reports.append(report)
+        for result in report.results:
+            color = {'PASS': 'green', 'FAIL': 'red'}.get(result.status, 'gray')
+            line = "<font color='%s'>%s %s: %s (%s)</font>" % (
+                color, _("Compatibility"), result.group.representative.name,
+                result.status, result.counts)
+            options.main_window.logview.append(line)
+
+    def add_compatible(self, result):
+        """Add a user-selected compatibility group representative to the detected ECUs."""
+        target = result.group.representative
+        name = target.name
+        if name in self.ecus or name in self.approximate_ecus or name in self.compatible_ecus:
+            return False
+        self.compatible_ecus[name] = target
+        self.num_ecu_found += 1
+        return True
 
     def _close_uds_session(self):
         """Send ECU back to default session after scanning (prevents broadcast bleed)."""
@@ -285,18 +361,25 @@ class EcuScanner:
                 return False
 
         # Remove unwanted non-ascii FF from string
-        soft_version = bytes.fromhex(can_response.replace(' ', '')[6:38]).decode("utf8", "ignore")
+        soft_version = bytes.fromhex(
+            can_response.replace(' ', '')[6:]
+        ).rstrip(b'\x00\xff ').decode("utf8", "ignore")
         if diagversion == "":
             self._close_uds_session()
             return False
 
-        self.check_ecu2(diagversion, supplier, soft, soft_version, label, addr, "CAN")
+        self.check_ecu2(diagversion, clean_ident(supplier), clean_ident(soft), clean_ident(soft_version),
+                        label, addr, "CAN")
         # Close the 1003 session before moving to the next ECU
         self._close_uds_session()
         return True
 
     def scan(self, progress=None, label=None, vehiclefilter=None, canline=0):
         i = 0
+        self.current_project = vehiclefilter
+        self.current_canline = canline
+        self.pending_compatibility = None
+        self._compat_logger = None
         if not options.simulation_mode:
             # Use integrated DeviceManager for enhanced features
             if hasattr(options, 'elm') and options.elm:
@@ -352,6 +435,10 @@ class EcuScanner:
             # Avoid to waste time, try new method : not working -> try old
             if not self.identify_new(addr, label):
                 self.identify_old(addr, label)
+
+            # Third level probe for this ECU, after its identification
+            # session has been closed by identify_new/identify_old.
+            self._run_pending_compatibility()
 
         if not options.simulation_mode:
             options.elm.close_protocol()
@@ -430,7 +517,7 @@ class EcuScanner:
     def check_ecu(self, can_response, label, addr, protocol):
         if len(can_response) > 59:
             diagversion = str(int(can_response[21:23], 16))
-            supplier = bytes.fromhex(can_response[24:32].replace(' ', '')).decode('utf-8')
+            supplier = clean_ident(bytes.fromhex(can_response[24:32].replace(' ', '')).decode('utf-8'))
             soft = can_response[48:53].replace(' ', '')
             version = can_response[54:59].replace(' ', '')
             self.check_ecu2(diagversion, supplier, soft, version, label, addr, protocol)
@@ -442,9 +529,9 @@ class EcuScanner:
                 try:
                     # Parse DoIP response format
                     if can_response.startswith("61 80"):
-                        # Positive response with diagnostic version
-                        diagversion = can_response[6:8]  # Simplified for DoIP
-                        supplier = can_response[9:17]  # Supplier code
+                        # Positive response with diagnostic version (decimal string like every other path)
+                        diagversion = str(int(can_response[6:8], 16))
+                        supplier = clean_ident(can_response[9:17])  # Supplier code
                         soft = can_response[18:26]  # Software version
                         version = can_response[27:35]  # Version
                         self.check_ecu2(diagversion, supplier, soft, version, label, addr, protocol)
@@ -459,7 +546,7 @@ class EcuScanner:
             if len(can_response) > 20:
                 try:
                     diagversion = str(int(can_response[6:8], 16))
-                    supplier = bytes.fromhex(can_response[9:17].replace(' ', '')).decode('utf-8')
+                    supplier = clean_ident(bytes.fromhex(can_response[9:17].replace(' ', '')).decode('utf-8'))
                     soft = can_response[18:26].replace(' ', '')
                     version = can_response[27:35].replace(' ', '')
                     self.check_ecu2(diagversion, supplier, soft, version, label, addr, protocol)

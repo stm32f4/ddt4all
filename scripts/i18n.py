@@ -32,10 +32,68 @@ DEFAULT_EXCLUDES = [
 WIN_CMD_LIMIT = 8000
 
 # ---- Helpers ----
-def which_or_fail(cmd):
+GETTEXT_INSTALL_HINT = (
+    "Install gettext tools: 'choco install gettext' (Chocolatey), "
+    "'scoop install gettext' (Scoop), or see "
+    "https://mlocati.github.io/gettext-iconv-windows/"
+)
+
+def _git_usr_bin():
+    """Locate the usr\\bin directory bundled with Git for Windows, if any.
+
+    git.exe can be found at different depths depending on the install
+    (Git\\cmd\\git.exe, Git\\bin\\git.exe, Git\\mingw64\\bin\\git.exe), so walk
+    up from wherever `git` resolves on PATH instead of assuming a fixed depth.
+    """
+    git_path = shutil.which("git")
+    if not git_path:
+        return None
+    for parent in Path(git_path).resolve().parents:
+        candidate = parent / "usr" / "bin"
+        if candidate.is_dir():
+            return candidate
+    return None
+
+def locate_gettext_tool(cmd):
+    """Find `cmd` on PATH, falling back to Git for Windows' bundled gettext.
+
+    Pure lookup: no prompt, no subprocess, no side effect.
+    """
     path = shutil.which(cmd)
+    if path:
+        return path
+    if os.name != "nt":
+        return None
+    git_bin = _git_usr_bin()
+    if git_bin is None:
+        return None
+    candidate = git_bin / f"{cmd}.exe"
+    return str(candidate) if candidate.is_file() else None
+
+def offer_install(cmd, verbose=False):
+    """Interactively offer to install gettext via choco/scoop, then re-locate `cmd`."""
+    if os.name != "nt" or not sys.stdin.isatty():
+        return None
+    if shutil.which("choco"):
+        manager, install_cmd = "choco", ["choco", "install", "gettext", "-y"]
+    elif shutil.which("scoop"):
+        manager, install_cmd = "scoop", ["scoop", "install", "gettext"]
+    else:
+        return None
+    answer = input(f"'{cmd}' not found. Install 'gettext' via {manager} now? [y/N] ").strip().lower()
+    if answer not in ("y", "yes"):
+        return None
+    print("RUN:", " ".join(install_cmd))
+    result = subprocess.run(install_cmd, check=False)
+    if result.returncode != 0:
+        print(f"[WARN] {manager} install failed (exit {result.returncode}).")
+        return None
+    return locate_gettext_tool(cmd)
+
+def which_or_fail(cmd, verbose=False):
+    path = locate_gettext_tool(cmd) or offer_install(cmd, verbose=verbose)
     if not path:
-        raise RuntimeError(f"Required command '{cmd}' not found in PATH. Install gettext/tools.")
+        raise RuntimeError(f"Required command '{cmd}' not found in PATH. {GETTEXT_INSTALL_HINT}")
     return path
 
 def run(cmd, dry_run=False, verbose=False, capture_output=False):
@@ -78,9 +136,23 @@ def ensure_dir(p: Path, dry_run=False, verbose=False):
     if not dry_run:
         p.mkdir(parents=True, exist_ok=True)
 
+def normalize_to_lf(p: Path, dry_run=False, verbose=False):
+    """gettext binaries built for native Windows (eg. the mingw tools bundled
+    with Git for Windows) write text files in Windows text mode, which turns
+    every '\\n' into '\\r\\n'. Force LF back so the repo files stay LF regardless
+    of which gettext build produced them."""
+    if dry_run or not p.exists():
+        return
+    data = p.read_bytes()
+    fixed = data.replace(b"\r\n", b"\n")
+    if fixed != data:
+        p.write_bytes(fixed)
+        if verbose:
+            print("[FIX] normalized CRLF->LF:", str(p))
+
 # ---- Commands ----
 def pot_create(args):
-    xgettext = which_or_fail("xgettext")
+    xgettext = which_or_fail("xgettext", verbose=args.verbose)
     root = Path(args.root).resolve()
     localedir = Path(args.localedir).resolve()
     domain = args.domain
@@ -122,13 +194,14 @@ def pot_create(args):
     if isinstance(res, subprocess.CompletedProcess) and res.returncode != 0 or res == 1:
         print("[ERR] xgettext failed.")
         return 2
+    normalize_to_lf(pot_path, dry_run=args.dry_run, verbose=args.verbose)
     print(f"[OK] {pot_path} generated ({len(pyfiles)} files analyzed)")
     return 0
 
 def po_merge(args):
-    msgmerge = which_or_fail("msgmerge")
-    msgattrib = which_or_fail("msgattrib")
-    msgfmt = which_or_fail("msgfmt")
+    msgmerge = which_or_fail("msgmerge", verbose=args.verbose)
+    msgattrib = which_or_fail("msgattrib", verbose=args.verbose)
+    msgfmt = which_or_fail("msgfmt", verbose=args.verbose)
     localedir = Path(args.localedir).resolve()
     domain = args.domain
     pot_path = Path(args.pot).resolve() if args.pot else (localedir / f"{domain}.pot")
@@ -162,16 +235,24 @@ def po_merge(args):
             try:
                 tmp.replace(po)
             except Exception:
-                tmp_text = tmp.read_text(encoding="utf-8") if tmp.exists() else None
+                tmp_text = tmp.read_text(encoding="utf-8", newline="") if tmp.exists() else None
                 if tmp_text is not None:
-                    po.write_text(tmp_text, encoding="utf-8")
+                    po.write_text(tmp_text, encoding="utf-8", newline="")
                     try:
                         tmp.unlink()
                     except Exception:
                         pass
 
-        cmd_stats = [msgfmt, "--statistics", "-c", "-o", os.devnull, str(po)]
+        normalize_to_lf(po, dry_run=args.dry_run, verbose=args.verbose)
+
+        # Some gettext builds (eg. the MSYS ones bundled with Git for Windows) don't
+        # special-case os.devnull ("nul" on Windows) as the null device and instead
+        # create a real file with that name, so compile to a real temp file instead.
+        stats_out = po.with_suffix(".stats.mo")
+        cmd_stats = [msgfmt, "--statistics", "-c", "-o", str(stats_out), str(po)]
         run(cmd_stats, dry_run=args.dry_run, verbose=args.verbose)
+        if stats_out.exists():
+            stats_out.unlink()
         print(f"[OK] {po} updated")
 
     return 0
@@ -181,7 +262,7 @@ def po_to_mo(args):
     Compile .po to .mo only in generated/<lang>/LC_MESSAGES/<domain>.mo
     (NO .mo next to .po)
     """
-    msgfmt = which_or_fail("msgfmt")
+    msgfmt = which_or_fail("msgfmt", verbose=args.verbose)
     localedir = Path(args.localedir).resolve()
     domain = args.domain
     generated_root = Path(args.generated_dir).resolve()

@@ -1,0 +1,75 @@
+{
+  "ecuname": "A IVI v3.1",
+  "obd": {
+    "protocol": "CAN",
+    "send_id": "712",
+    "recv_id": "71A",
+    "baudrate": 500000,
+    "funcaddr": "0E",
+    "funcname": "sample infotainment unit"
+  },
+  "endian": "Big",
+  "devices": [],
+  "data": {
+    "Sample Supplier": {
+      "bitscount": 16,
+      "bytescount": 2,
+      "lists": {
+        "1": "Sample Supplier A",
+        "2": "Sample Supplier B"
+      }
+    },
+    "Sample Software Number": {
+      "bitscount": 32,
+      "bytescount": 4
+    }
+  },
+  "requests": [
+    {
+      "name": "StartDiagnosticSession.Extended",
+      "sentbytes": "1003",
+      "replybytes": "5003",
+      "minbytes": 2,
+      "manualsend": true,
+      "deny_sds": []
+    },
+    {
+      "name": "StartDiagnosticSession.Default",
+      "sentbytes": "1001",
+      "replybytes": "5001",
+      "minbytes": 2,
+      "manualsend": true,
+      "deny_sds": []
+    },
+    {
+      "name": "StartDiagnosticSession.Reprog",
+      "sentbytes": "1002",
+      "replybytes": "5002",
+      "minbytes": 2,
+      "manualsend": true,
+      "deny_sds": []
+    },
+    {
+      "name": "ReadDiagnosticVersion",
+      "sentbytes": "22F1A0",
+      "minbytes": 4,
+      "receivebyte_dataitems": {}
+    },
+    {
+      "name": "ReadSupplierIdentification",
+      "sentbytes": "22F18A",
+      "minbytes": 4,
+      "receivebyte_dataitems": {
+        "Sample Supplier": {"firstbyte": 4}
+      }
+    },
+    {
+      "name": "ReadSoftwareNumber",
+      "sentbytes": "22F194",
+      "minbytes": 4,
+      "receivebyte_dataitems": {
+        "Sample Software Number": {"firstbyte": 4}
+      }
+    }
+  ]
+}

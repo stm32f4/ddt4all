@@ -56,6 +56,7 @@ class MainWindowOptions(widgets.QDialog):
         self.mode = 0
         self.securitycheck = False
         self.CAN2 = False
+        self.compat_check = False
         self.selectedportspeed = 38400
         self.adapter = "STD"
         self.raise_port_speed = _("No")
@@ -273,6 +274,16 @@ class MainWindowOptions(widgets.QDialog):
         doip_scanlayout.addWidget(doip_scanlabel)
         doip_scanlayout.addStretch()
         layout.addLayout(doip_scanlayout)
+
+        # Compatibility detection (third identification level during CAN scan)
+        compat_checklayout = widgets.QHBoxLayout()
+        self.compat_checkbox = widgets.QCheckBox()
+        self.compat_checkbox.setChecked(False)
+        compat_label = widgets.QLabel(_("Enable compatibility detection"))
+        compat_checklayout.addWidget(self.compat_checkbox)
+        compat_checklayout.addWidget(compat_label)
+        compat_checklayout.addStretch()
+        layout.addLayout(compat_checklayout)
 
         # DoIP configuration section
         doip_grouplayout = widgets.QVBoxLayout()
@@ -1177,6 +1188,7 @@ class MainWindowOptions(widgets.QDialog):
             self._scan_worker.wait()
         self.securitycheck = self.safetycheck.isChecked()
         self.CAN2 = self.safetyCAN2check.isChecked()
+        self.compat_check = self.compat_checkbox.isChecked()
         self.selectedportspeed = int(self.speedcombo.currentText())
         if not self.securitycheck:
             msgbox = widgets.QMessageBox()
@@ -1217,6 +1229,7 @@ class MainWindowOptions(widgets.QDialog):
             self._scan_worker.wait()
         self.securitycheck = self.safetycheck.isChecked()
         self.CAN2 = self.safetyCAN2check.isChecked()
+        self.compat_check = self.compat_checkbox.isChecked()
         self.port = 'DUMMY'
         self.mode = 2
         options.report_data = False

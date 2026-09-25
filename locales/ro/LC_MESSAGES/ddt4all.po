@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDT4ALL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-28 19:29+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: ROMANIAN <numaialmeu@yahoo.com>\n"
@@ -119,12 +119,14 @@ msgid "DoIP: Using extended addressing for Electric Vehicle Systems"
 msgstr "DoIP: Utilizare adresare extinsă pentru Sisteme de Vehicule Electrice"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
-msgstr "DoIP: Utilizare adresare extinsă de 29-bit - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
+msgstr ""
+"DoIP: Utilizare adresare extinsă de 29-bit - TX:0x{0:04X}, RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
-msgstr "DoIP: Utilizare adresare standard de 11-bit - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
+msgstr ""
+"DoIP: Utilizare adresare standard de 11-bit - TX:0x{0:03X}, RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Avertisment, nu se poate obține valoare cu semn pentru"
@@ -182,6 +184,23 @@ msgstr "(potrivire nu perfectă)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(nu s-a găsit fișier ECU relevant)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Eroare la verificarea compatibilității: %s"
+
+msgid "Compatibility check"
+msgstr "Verificare compatibilitate"
+
+msgid "candidate group(s), probing..."
+msgstr "grup(uri) candidat(e), testare..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Eroare la testul de compatibilitate: %s"
+
+msgid "Compatibility"
+msgstr "Compatibilitate"
 
 msgid "Warning, address"
 msgstr "Avertisment, adresă"
@@ -588,6 +607,9 @@ msgstr "Scriere arhivă"
 
 msgid "Opening ECU Database..."
 msgstr "Deschidere bază de date ECU..."
+
+msgid "DataItem not found"
+msgstr "DataItem negăsit"
 
 msgid "parts as: "
 msgstr "părți ca: "
@@ -1234,9 +1256,6 @@ msgstr "Nicio cerere numită"
 msgid "Found similar"
 msgstr "Găsit similar"
 
-msgid "DataItem not found"
-msgstr "DataItem negăsit"
-
 msgid "Cannot find data "
 msgstr "Nu se pot găsi date "
 
@@ -1248,6 +1267,53 @@ msgstr "Pluginul nu se poate incarca "
 
 msgid "No Value"
 msgstr "Valori"
+
+msgid "ECU compatibility check"
+msgstr "Verificare compatibilitate ECU"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Nicio definiție nu corespunde acestor ECU. Grupurile marcate cu o bifă verde "
+"au răspuns corect la testul doar în citire și pot fi adăugate la ECU-urile "
+"detectate."
+
+msgid "Select"
+msgstr "Selecție"
+
+msgid "State"
+msgstr "Stare"
+
+msgid "ECU"
+msgstr "ECU"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Protocol"
+
+msgid "Diag"
+msgstr "Diag"
+
+msgid "Soft"
+msgstr "Software"
+
+msgid "Version"
+msgstr "Versiune"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Reușite / Eșuate / Neconcludente"
+
+msgid "Add selection"
+msgstr "Adaugă selecția"
+
+msgid "Close"
+msgstr "Închide"
+
+msgid "CAN line"
+msgstr "Linie CAN"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1288,26 +1354,6 @@ msgstr "Baza de date zip"
 
 msgid "Check documentation"
 msgstr "Documentatie"
-
-msgid "DDT4All Documentation"
-msgstr "Documentație DDT4All"
-
-msgid "WebEngine not available."
-msgstr "WebEngine nu este disponibil."
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-"Pentru documentație completă cu capacitate de navigare web, instalați "
-"PyQtWebEngine:"
-
-msgid "Visit the online documentation at:"
-msgstr "Vizitează documentația online la:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Această vizualizare de bază va afișa în continuare documentația ECU atunci "
-"când este disponibilă."
 
 msgid "Refresh rate (ms):"
 msgstr "Rata de actualizare (ms):"
@@ -1559,6 +1605,9 @@ msgstr "Scanarea KWP"
 msgid "Scanning DoIP"
 msgstr "Scanare DoIP"
 
+msgid "Added compatible ECU"
+msgstr "ECU compatibil adăugat"
+
 msgid "Scan options"
 msgstr "Optiuni de scanare"
 
@@ -1651,6 +1700,9 @@ msgstr "Timeout socket WiFi"
 
 msgid "Enable DoIP Scan"
 msgstr "Activați scanarea DoIP"
+
+msgid "Enable compatibility detection"
+msgstr "Activează detectarea compatibilității"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "Configurare DoIP (Diagnostică prin IP) (Experimental)"

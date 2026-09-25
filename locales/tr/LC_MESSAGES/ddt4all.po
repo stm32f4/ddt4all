@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDT4ALL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-07 13:13+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: TURKISH\n"
@@ -119,13 +119,14 @@ msgstr ""
 "DoIP: Elektrikli Araç Sistemleri için genişletilmiş adresleme kullanılıyor"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
-"DoIP: 29-bit genişletilmiş adresleme kullanıyor - TX:0x{:04X}, RX:0x{:04X}"
+"DoIP: 29-bit genişletilmiş adresleme kullanıyor - TX:0x{0:04X}, RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
-msgstr "DoIP: 11-bit standart adresleme kullanıyor - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
+msgstr ""
+"DoIP: 11-bit standart adresleme kullanıyor - TX:0x{0:03X}, RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Uyarı, imzalı değer alınamıyor"
@@ -183,6 +184,23 @@ msgstr "(mükemmel bir eşleşme değil)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(ilgili ECU dosyası bulunamadı)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Uyumluluk kontrolü hatası: %s"
+
+msgid "Compatibility check"
+msgstr "Uyumluluk kontrolü"
+
+msgid "candidate group(s), probing..."
+msgstr "aday grup, test ediliyor..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Uyumluluk testi hatası: %s"
+
+msgid "Compatibility"
+msgstr "Uyumluluk"
 
 msgid "Warning, address"
 msgstr "Uyarı, adres"
@@ -590,6 +608,9 @@ msgstr "Arşiv yazılıyor"
 
 msgid "Opening ECU Database..."
 msgstr "ECU Veritabanı açılıyor..."
+
+msgid "DataItem not found"
+msgstr "Veri Öğesi bulunamadı"
 
 msgid "parts as: "
 msgstr "parçalar olarak: "
@@ -1237,9 +1258,6 @@ msgstr "Adlandırılmış istek yok"
 msgid "Found similar"
 msgstr "Benzer bulundu"
 
-msgid "DataItem not found"
-msgstr "Veri Öğesi bulunamadı"
-
 msgid "Cannot find data "
 msgstr "Veri bulunamıyor "
 
@@ -1251,6 +1269,52 @@ msgstr "Giriş çizilemiyor "
 
 msgid "No Value"
 msgstr "Değer Yok"
+
+msgid "ECU compatibility check"
+msgstr "ECU uyumluluk kontrolü"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Bu ECU'lara uyan tanım bulunamadı. Yeşil onay işaretli gruplar salt okunur "
+"teste doğru yanıt verdi ve algılanan ECU'lara eklenebilir."
+
+msgid "Select"
+msgstr "Seçim"
+
+msgid "State"
+msgstr "Durum"
+
+msgid "ECU"
+msgstr "ECU"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Protokol"
+
+msgid "Diag"
+msgstr "Diag"
+
+msgid "Soft"
+msgstr "Yazılım"
+
+msgid "Version"
+msgstr "Sürüm"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Başarılı / Başarısız / Sonuçsuz"
+
+msgid "Add selection"
+msgstr "Seçimi ekle"
+
+msgid "Close"
+msgstr "Kapat"
+
+msgid "CAN line"
+msgstr "CAN hattı"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1290,25 +1354,6 @@ msgstr "Veritabanı bulunamadı"
 
 msgid "Check documentation"
 msgstr "Belgeleri kontrol edin"
-
-msgid "DDT4All Documentation"
-msgstr "DDT4All Belgeleri"
-
-msgid "WebEngine not available."
-msgstr ""
-"WebEngine mevcut değil. Tam dokümantasyon için web tarama yeteneği için "
-"PyQtWebEngine kurun:"
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr "Web tarama özellikli tam belgeleme için PyQtWebEngine kurun:"
-
-msgid "Visit the online documentation at:"
-msgstr "Çevrimiçi belgeleri ziyaret edin:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Bu temel görünüm, mevcut olduğunda ECU belgelerini göstermeye devam edecek."
 
 msgid "Refresh rate (ms):"
 msgstr "Yenileme hızı (ms):"
@@ -1560,6 +1605,9 @@ msgstr "KWP Taranıyor"
 msgid "Scanning DoIP"
 msgstr "DoIP Taranıyor"
 
+msgid "Added compatible ECU"
+msgstr "Uyumlu ECU eklendi"
+
 msgid "Scan options"
 msgstr "Tarama seçenekleri"
 
@@ -1652,6 +1700,9 @@ msgstr "WiFi socket zaman aşımı"
 
 msgid "Enable DoIP Scan"
 msgstr "DoIP taramasını etkinleştir"
+
+msgid "Enable compatibility detection"
+msgstr "Uyumluluk algılamayı etkinleştir"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "DoIP (IP Üzerinden Tanı) Yapılandırması (Deneysel)"

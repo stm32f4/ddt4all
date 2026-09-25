@@ -129,6 +129,7 @@ def main(argv=None) -> int:
             continue
 
         options.opt_can2 = pc.CAN2
+        options.opt_compat_check = pc.compat_check
 
         if pc.mode == 1:
             options.promode = False

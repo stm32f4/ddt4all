@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: ddt4all\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-10 06:29+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: Serbian\n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.9\n"
 
 msgid "DoIP device connected successfully"
@@ -119,14 +119,16 @@ msgid "DoIP: Using extended addressing for Electric Vehicle Systems"
 msgstr "DoIP: Korišćenje proširenog adresiranja za sisteme električnih vozila"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
-"DoIP: Korišćenje 29-bitnog proširenog adresiranja - TX:0x{:04X}, RX:0x{:04X}"
+"DoIP: Korišćenje 29-bitnog proširenog adresiranja - TX:0x{0:04X}, "
+"RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
 msgstr ""
-"DoIP: Korišćenje 11-bitnog standardnog adresiranja - TX:0x{:03X}, RX:0x{:03X}"
+"DoIP: Korišćenje 11-bitnog standardnog adresiranja - TX:0x{0:03X}, "
+"RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Upozorenje, ne može se dobiti vrednost sa znakom za"
@@ -184,6 +186,23 @@ msgstr "(nije savršeno podudaranje)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(nije pronađena odgovarajuća ECU datoteka)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Greška provere kompatibilnosti: %s"
+
+msgid "Compatibility check"
+msgstr "Provera kompatibilnosti"
+
+msgid "candidate group(s), probing..."
+msgstr "kandidat grupa(e), testiranje..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Greška testa kompatibilnosti: %s"
+
+msgid "Compatibility"
+msgstr "Kompatibilnost"
 
 msgid "Warning, address"
 msgstr "Upozorenje, adresa"
@@ -591,6 +610,9 @@ msgstr "Pisanje arhive"
 
 msgid "Opening ECU Database..."
 msgstr "Otvaranje ECU baze podataka..."
+
+msgid "DataItem not found"
+msgstr "DataItem nije pronađen"
 
 msgid "parts as: "
 msgstr "delovi kao: "
@@ -1238,9 +1260,6 @@ msgstr "Nema naziva zahteva"
 msgid "Found similar"
 msgstr "Pronađeno slično"
 
-msgid "DataItem not found"
-msgstr "DataItem nije pronađen"
-
 msgid "Cannot find data "
 msgstr "Ne mogu pronaći podatke "
 
@@ -1252,6 +1271,52 @@ msgstr "Nije moguce pozvati zahtev "
 
 msgid "No Value"
 msgstr "Nema vrednosti"
+
+msgid "ECU compatibility check"
+msgstr "Provera kompatibilnosti ECU"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Nijedna definicija ne odgovara ovim ECU. Grupe označene zelenom kvačicom su "
+"ispravno odgovorile na test samo za čitanje i mogu se dodati otkrivenim ECU."
+
+msgid "Select"
+msgstr "Izbor"
+
+msgid "State"
+msgstr "Stanje"
+
+msgid "ECU"
+msgstr "ECU"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Protokol"
+
+msgid "Diag"
+msgstr "Dijag"
+
+msgid "Soft"
+msgstr "Softver"
+
+msgid "Version"
+msgstr "Verzija"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Uspešno / Neuspešno / Neodređeno"
+
+msgid "Add selection"
+msgstr "Dodaj izbor"
+
+msgid "Close"
+msgstr "Zatvori"
+
+msgid "CAN line"
+msgstr "CAN linija"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1290,26 +1355,6 @@ msgstr "Baza podataka nije pronađena"
 
 msgid "Check documentation"
 msgstr "Proverite dokumentaciju"
-
-msgid "DDT4All Documentation"
-msgstr "DDT4All Dokumentacija"
-
-msgid "WebEngine not available."
-msgstr "WebEngine nije dostupan."
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-"Za potpunu dokumentaciju sa mogućnošću web pretraživanja, instalirajte "
-"PyQtWebEngine:"
-
-msgid "Visit the online documentation at:"
-msgstr "Posetite online dokumentaciju na:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Ovaj osnovni prikaz će i dalje prikazivati ECU dokumentaciju kada je "
-"dostupna."
 
 msgid "Refresh rate (ms):"
 msgstr "Vreme osvezavanja (ms):"
@@ -1561,6 +1606,9 @@ msgstr "Skeniranje KWP"
 msgid "Scanning DoIP"
 msgstr "Skeniranje DoIP"
 
+msgid "Added compatible ECU"
+msgstr "Dodat kompatibilan ECU"
+
 msgid "Scan options"
 msgstr "Opcije skeniranja"
 
@@ -1653,6 +1701,9 @@ msgstr "Timeout WiFi soketa"
 
 msgid "Enable DoIP Scan"
 msgstr "Omogući DoIP skeniranje"
+
+msgid "Enable compatibility detection"
+msgstr "Omogući detekciju kompatibilnosti"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "DoIP (Dijagnostika preko IP) Konfiguracija (Eksperimentalno)"

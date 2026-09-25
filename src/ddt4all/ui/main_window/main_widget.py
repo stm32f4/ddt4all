@@ -21,6 +21,7 @@ from ddt4all.ui.data_editor.button_editor import ButtonEditor
 from ddt4all.ui.data_editor.request_editor import RequestEditor
 from ddt4all.ui.data_editor.ecu_param_editor import EcuParamEditor
 from ddt4all.ui.data_editor.data_editor import DataEditor
+from ddt4all.ui.main_window.compatibility_dialog import CompatibilityDialog
 from ddt4all.ui.main_window.ecu_finder import EcuFinder
 from ddt4all.ui.main_window.ecu_list import EcuList
 from ddt4all.ui.main_window.icons_paths import (
@@ -812,6 +813,9 @@ class MainWidget(widgets.QMainWindow):
             self.logview.append(_("Scanning DoIP") + " -> " + project)
             self.ecu_scan.scan_doip(self.progressstatus, self.infostatus, project)
 
+        # Third identification level: one dialog after all scans, before the list is filled
+        self.compatibility_dialog()
+
         for ecu in self.ecu_scan.ecus.keys():
             self.ecunamemap[ecu] = self.ecu_scan.ecus[ecu].name
             item = widgets.QListWidgetItem(ecu)
@@ -827,10 +831,32 @@ class MainWidget(widgets.QMainWindow):
             item.setForeground(core.Qt.blue)
             self.treeview_ecu.addItem(item)
 
+        # Compatibility matches use the same style as partial matches
+        for ecu in self.ecu_scan.compatible_ecus.keys():
+            self.ecunamemap[ecu] = self.ecu_scan.compatible_ecus[ecu].name
+            item = widgets.QListWidgetItem(ecu)
+            item.setForeground(core.Qt.blue)
+            self.treeview_ecu.addItem(item)
+
         self.progressstatus.setValue(0)
-        
+
         # Try to restore last opened ECU after scan is complete
         self.restore_last_ecu()
+
+    def compatibility_dialog(self):
+        """Show the compatibility probe results and add the groups selected by the user."""
+        reports = self.ecu_scan.compatibility_reports
+        if not reports:
+            return
+        dialog = CompatibilityDialog(reports, self)
+        if dialog.exec_() != widgets.QDialog.Accepted:
+            return
+        for result in dialog.selected_results():
+            if self.ecu_scan.add_compatible(result):
+                rep = result.group.representative
+                self.logview.append("<font color='blue'>" + _("Added compatible ECU") + " %s @%s</font>"
+                                    % (rep.name, rep.addr))
+        self.infostatus.setText(_("Found: ") + " %i ECU" % self.ecu_scan.num_ecu_found)
 
     def scan(self):
         msgBox = widgets.QMessageBox()
@@ -1120,6 +1146,8 @@ class MainWidget(widgets.QMainWindow):
             ecu = self.ecu_scan.ecus[ecu_name]
         elif ecu_name in self.ecu_scan.approximate_ecus:
             ecu = self.ecu_scan.approximate_ecus[ecu_name]
+        elif ecu_name in self.ecu_scan.compatible_ecus:
+            ecu = self.ecu_scan.compatible_ecus[ecu_name]
         elif ecu_name in self.ecunamemap:
             name = self.ecunamemap[ecu_name]
             ecu = self.ecu_scan.ecu_database.getTarget(name)

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDT4ALL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-10 06:30+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: \n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<12 || n%100>14) ? 1 : 2);\n"
 "X-Generator: Poedit 3.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -120,14 +120,16 @@ msgid "DoIP: Using extended addressing for Electric Vehicle Systems"
 msgstr "DoIP: Використання розширеної адресації для систем електромобілів"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
-"DoIP: Використання 29-бітної розширеної адресації - TX:0x{:04X}, RX:0x{:04X}"
+"DoIP: Використання 29-бітної розширеної адресації - TX:0x{0:04X}, "
+"RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
 msgstr ""
-"DoIP: Використання 11-бітної стандартної адресації - TX:0x{:03X}, RX:0x{:03X}"
+"DoIP: Використання 11-бітної стандартної адресації - TX:0x{0:03X}, "
+"RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Попередження, не можна отримати значення зі знаком для"
@@ -185,6 +187,23 @@ msgstr "(не ідеальна відповідність)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(не знайдено відповідного файлу ECU)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Помилка перевірки сумісності: %s"
+
+msgid "Compatibility check"
+msgstr "Перевірка сумісності"
+
+msgid "candidate group(s), probing..."
+msgstr "група(и) кандидатів, тестування..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Помилка тесту сумісності: %s"
+
+msgid "Compatibility"
+msgstr "Сумісність"
 
 msgid "Warning, address"
 msgstr "Попередження, адреса"
@@ -592,6 +611,9 @@ msgstr "Запис архіву"
 
 msgid "Opening ECU Database..."
 msgstr "Відкриття бази даних ECU..."
+
+msgid "DataItem not found"
+msgstr "DataItem не знайдено"
 
 msgid "parts as: "
 msgstr "частини як: "
@@ -1240,9 +1262,6 @@ msgstr "Запит не названо"
 msgid "Found similar"
 msgstr "Знайдено схожі"
 
-msgid "DataItem not found"
-msgstr "DataItem не знайдено"
-
 msgid "Cannot find data "
 msgstr "Не вдалось знайти дані "
 
@@ -1254,6 +1273,53 @@ msgstr "Не вдалось намалювати вхід "
 
 msgid "No Value"
 msgstr "Немає значення"
+
+msgid "ECU compatibility check"
+msgstr "Перевірка сумісності ECU"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Жодне визначення не відповідає цим ECU. Групи, позначені зеленою галочкою, "
+"коректно відповіли на тест лише для читання і можуть бути додані до "
+"виявлених ECU."
+
+msgid "Select"
+msgstr "Вибір"
+
+msgid "State"
+msgstr "Стан"
+
+msgid "ECU"
+msgstr "ECU"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Протокол"
+
+msgid "Diag"
+msgstr "Діаг"
+
+msgid "Soft"
+msgstr "ПЗ"
+
+msgid "Version"
+msgstr "Версія"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Успішно / Помилки / Невизначено"
+
+msgid "Add selection"
+msgstr "Додати вибране"
+
+msgid "Close"
+msgstr "Закрити"
+
+msgid "CAN line"
+msgstr "Лінія CAN"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1293,25 +1359,6 @@ msgstr "Не знайдено базу данних"
 
 msgid "Check documentation"
 msgstr "Перевірте документацію"
-
-msgid "DDT4All Documentation"
-msgstr "Документація DDT4All"
-
-msgid "WebEngine not available."
-msgstr "WebEngine недоступний."
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-"Для повної документації з можливістю перегляду веб-сторінок, встановіть "
-"PyQtWebEngine:"
-
-msgid "Visit the online documentation at:"
-msgstr "Відвідайте онлайн документацію за адресою:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Цей базовий вигляд все одно буде показувати документацію ECU, коли доступна."
 
 msgid "Refresh rate (ms):"
 msgstr "Частота оновлення (мс):"
@@ -1563,6 +1610,9 @@ msgstr "Сканування KWP"
 msgid "Scanning DoIP"
 msgstr "Сканування DoIP"
 
+msgid "Added compatible ECU"
+msgstr "Додано сумісний ECU"
+
 msgid "Scan options"
 msgstr "Опції сканування"
 
@@ -1655,6 +1705,9 @@ msgstr "Таймаут сокета WiFi"
 
 msgid "Enable DoIP Scan"
 msgstr "Увімкнути сканування DoIP"
+
+msgid "Enable compatibility detection"
+msgstr "Увімкнути виявлення сумісності"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "Конфігурація DoIP (Діагностика через IP) (Експериментально)"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 08:01+0200\n"
+"POT-Creation-Date: 2026-09-25 05:00+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,11 +117,11 @@ msgid "DoIP: Using extended addressing for Electric Vehicle Systems"
 msgstr ""
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
 msgstr ""
 
 msgid "Warning, cannot get signed value for"
@@ -179,6 +179,23 @@ msgid "(not perfect match)"
 msgstr ""
 
 msgid "(no relevant ECU file found)"
+msgstr ""
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr ""
+
+msgid "Compatibility check"
+msgstr ""
+
+msgid "candidate group(s), probing..."
+msgstr ""
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr ""
+
+msgid "Compatibility"
 msgstr ""
 
 msgid "Warning, address"
@@ -575,6 +592,9 @@ msgid "Writing archive"
 msgstr ""
 
 msgid "Opening ECU Database..."
+msgstr ""
+
+msgid "DataItem not found"
 msgstr ""
 
 msgid "parts as: "
@@ -1153,9 +1173,6 @@ msgstr ""
 msgid "Found similar"
 msgstr ""
 
-msgid "DataItem not found"
-msgstr ""
-
 msgid "Cannot find data "
 msgstr ""
 
@@ -1166,6 +1183,48 @@ msgid "Cannot draw input "
 msgstr ""
 
 msgid "No Value"
+msgstr ""
+
+msgid "ECU compatibility check"
+msgstr ""
+
+msgid "No definition matched these ECUs. Groups marked with a green tick answered the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+
+msgid "Select"
+msgstr ""
+
+msgid "State"
+msgstr ""
+
+msgid "ECU"
+msgstr ""
+
+msgid "ID"
+msgstr ""
+
+msgid "Protocol"
+msgstr ""
+
+msgid "Diag"
+msgstr ""
+
+msgid "Soft"
+msgstr ""
+
+msgid "Version"
+msgstr ""
+
+msgid "Pass / Fail / Inconclusive"
+msgstr ""
+
+msgid "Add selection"
+msgstr ""
+
+msgid "Close"
+msgstr ""
+
+msgid "CAN line"
 msgstr ""
 
 msgid "<center>This Software is free, but I need money to buy cables/ECUs and make this application more reliable</center>"
@@ -1200,21 +1259,6 @@ msgid "No database found"
 msgstr ""
 
 msgid "Check documentation"
-msgstr ""
-
-msgid "DDT4All Documentation"
-msgstr ""
-
-msgid "WebEngine not available."
-msgstr ""
-
-msgid "For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-
-msgid "Visit the online documentation at:"
-msgstr ""
-
-msgid "This basic view will still show ECU documentation when available."
 msgstr ""
 
 msgid "Refresh rate (ms):"
@@ -1467,6 +1511,9 @@ msgstr ""
 msgid "Scanning DoIP"
 msgstr ""
 
+msgid "Added compatible ECU"
+msgstr ""
+
 msgid "Scan options"
 msgstr ""
 
@@ -1558,6 +1605,9 @@ msgid "WiFi Socket-TimeOut"
 msgstr ""
 
 msgid "Enable DoIP Scan"
+msgstr ""
+
+msgid "Enable compatibility detection"
 msgstr ""
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"

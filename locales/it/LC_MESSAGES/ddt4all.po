@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDT4ALL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-28 19:29+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: bovirus@gmail.com\n"
@@ -119,14 +119,14 @@ msgid "DoIP: Using extended addressing for Electric Vehicle Systems"
 msgstr "DoIP: Utilizzo indirizzamento esteso per Sistemi Veicoli Elettrici"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
-"DoIP: Utilizzo indirizzamento esteso a 29-bit - TX:0x{:04X}, RX:0x{:04X}"
+"DoIP: Utilizzo indirizzamento esteso a 29-bit - TX:0x{0:04X}, RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
 msgstr ""
-"DoIP: Utilizzo indirizzamento standard a 11-bit - TX:0x{:03X}, RX:0x{:03X}"
+"DoIP: Utilizzo indirizzamento standard a 11-bit - TX:0x{0:03X}, RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Attenzione, impossibile ottenere valore con segno per"
@@ -184,6 +184,23 @@ msgstr "(corrispondenza non perfetta)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(nessun file ECU rilevante trovato)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Errore nella verifica di compatibilità: %s"
+
+msgid "Compatibility check"
+msgstr "Verifica di compatibilità"
+
+msgid "candidate group(s), probing..."
+msgstr "gruppo/i candidato/i, test in corso..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Errore nel test di compatibilità: %s"
+
+msgid "Compatibility"
+msgstr "Compatibilità"
 
 msgid "Warning, address"
 msgstr "Attenzione, indirizzo"
@@ -594,6 +611,9 @@ msgstr "Scrittura archivio"
 
 msgid "Opening ECU Database..."
 msgstr "Apertura database ECU..."
+
+msgid "DataItem not found"
+msgstr "Elemento dati non trovato"
 
 msgid "parts as: "
 msgstr "parti come: "
@@ -1241,9 +1261,6 @@ msgstr "Nessuna richiesta denominata"
 msgid "Found similar"
 msgstr "Trovato simile"
 
-msgid "DataItem not found"
-msgstr "Elemento dati non trovato"
-
 msgid "Cannot find data "
 msgstr "Impossibile trovare dati "
 
@@ -1255,6 +1272,53 @@ msgstr "Impossibile disegnare l'input "
 
 msgid "No Value"
 msgstr "Nessun valore"
+
+msgid "ECU compatibility check"
+msgstr "Verifica di compatibilità ECU"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Nessuna definizione corrisponde a queste ECU. I gruppi contrassegnati con "
+"una spunta verde hanno risposto correttamente al test in sola lettura e "
+"possono essere aggiunti alle ECU rilevate."
+
+msgid "Select"
+msgstr "Selezione"
+
+msgid "State"
+msgstr "Stato"
+
+msgid "ECU"
+msgstr "ECU"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Protocollo"
+
+msgid "Diag"
+msgstr "Diag"
+
+msgid "Soft"
+msgstr "Software"
+
+msgid "Version"
+msgstr "Versione"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Superati / Falliti / Non conclusivi"
+
+msgid "Add selection"
+msgstr "Aggiungi selezione"
+
+msgid "Close"
+msgstr "Chiudi"
+
+msgid "CAN line"
+msgstr "Linea CAN"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1293,25 +1357,6 @@ msgstr "Nessun database trovato"
 
 msgid "Check documentation"
 msgstr "Controlla la documentazione"
-
-msgid "DDT4All Documentation"
-msgstr "Documentazione DDT4All"
-
-msgid "WebEngine not available."
-msgstr "WebEngine non disponibile."
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-"Per la documentazione completa con capacità di navigazione web, installa "
-"PyQtWebEngine:"
-
-msgid "Visit the online documentation at:"
-msgstr "Visita la documentazione online all'indirizzo:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Questa vista base mostrerà comunque la documentazione ECU quando disponibile."
 
 msgid "Refresh rate (ms):"
 msgstr "Tempo aggiornamento (ms)"
@@ -1565,6 +1610,9 @@ msgstr "Ricerca KWP"
 msgid "Scanning DoIP"
 msgstr "Ricerca DoIP"
 
+msgid "Added compatible ECU"
+msgstr "ECU compatibile aggiunta"
+
 msgid "Scan options"
 msgstr "Opzioni ricerca"
 
@@ -1657,6 +1705,9 @@ msgstr "Timeout socket WiFi"
 
 msgid "Enable DoIP Scan"
 msgstr "Abilita scansione DoIP"
+
+msgid "Enable compatibility detection"
+msgstr "Attiva il rilevamento di compatibilità"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "Configurazione DoIP (Diagnostica su IP) (Sperimentale)"

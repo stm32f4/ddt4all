@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDT4ALL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-28 19:28+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: \n"
@@ -119,13 +119,14 @@ msgid "DoIP: Using extended addressing for Electric Vehicle Systems"
 msgstr "DoIP: Kiterjesztett címzés használata Elektromos Jármű Rendszerekhez"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
-"DoIP: 29-bites kiterjesztett címzés használata - TX:0x{:04X}, RX:0x{:04X}"
+"DoIP: 29-bites kiterjesztett címzés használata - TX:0x{0:04X}, RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
-msgstr "DoIP: 11-bites szabványos címzés használata - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
+msgstr ""
+"DoIP: 11-bites szabványos címzés használata - TX:0x{0:03X}, RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Figyelmeztetés, nem lehet előjeles értéket kapni ehhez"
@@ -183,6 +184,23 @@ msgstr "(nem tökéletes egyezés)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(nem található releváns ECU fájl)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Kompatibilitás-ellenőrzési hiba: %s"
+
+msgid "Compatibility check"
+msgstr "Kompatibilitás-ellenőrzés"
+
+msgid "candidate group(s), probing..."
+msgstr "jelölt csoport, tesztelés..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Kompatibilitási teszt hiba: %s"
+
+msgid "Compatibility"
+msgstr "Kompatibilitás"
 
 msgid "Warning, address"
 msgstr "Figyelmeztetés, cím"
@@ -592,6 +610,9 @@ msgstr "Archívum írása"
 
 msgid "Opening ECU Database..."
 msgstr "ECU adatbázis megnyitása..."
+
+msgid "DataItem not found"
+msgstr "DataItem nem található"
 
 msgid "parts as: "
 msgstr "részek mint: "
@@ -1239,9 +1260,6 @@ msgstr "Nincs elnevezett parancs"
 msgid "Found similar"
 msgstr "Hasonló található"
 
-msgid "DataItem not found"
-msgstr "DataItem nem található"
-
 msgid "Cannot find data "
 msgstr "Nem található adat "
 
@@ -1253,6 +1271,53 @@ msgstr "Sikertelen parancshívás "
 
 msgid "No Value"
 msgstr "Nincs érték"
+
+msgid "ECU compatibility check"
+msgstr "ECU kompatibilitás-ellenőrzés"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Egyik definíció sem illik ezekhez az ECU-khoz. A zöld pipával jelölt "
+"csoportok helyesen válaszoltak a csak olvasási tesztre, és hozzáadhatók az "
+"észlelt ECU-khoz."
+
+msgid "Select"
+msgstr "Kiválasztás"
+
+msgid "State"
+msgstr "Állapot"
+
+msgid "ECU"
+msgstr "ECU"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Protokoll"
+
+msgid "Diag"
+msgstr "Diag"
+
+msgid "Soft"
+msgstr "Szoftver"
+
+msgid "Version"
+msgstr "Verzió"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Sikeres / Sikertelen / Nem egyértelmű"
+
+msgid "Add selection"
+msgstr "Kijelöltek hozzáadása"
+
+msgid "Close"
+msgstr "Bezárás"
+
+msgid "CAN line"
+msgstr "CAN vonal"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1291,25 +1356,6 @@ msgstr "Nem található adatbázis"
 
 msgid "Check documentation"
 msgstr "Dokumentáció ellenőrzése"
-
-msgid "DDT4All Documentation"
-msgstr "DDT4All Dokumentáció"
-
-msgid "WebEngine not available."
-msgstr "WebEngine nem elérhető."
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-"A teljes dokumentációhoz webböngészési képességgel, telepítse a "
-"PyQtWebEngine-t:"
-
-msgid "Visit the online documentation at:"
-msgstr "Látogasson el az online dokumentációhoz:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Ez az alap nézet továbbra is megjeleníti az ECU dokumentációt, ha elérhető."
 
 msgid "Refresh rate (ms):"
 msgstr "Frissítés (ms):"
@@ -1561,6 +1607,9 @@ msgstr "KWP keresés"
 msgid "Scanning DoIP"
 msgstr "DoIP keresés"
 
+msgid "Added compatible ECU"
+msgstr "Kompatibilis ECU hozzáadva"
+
 msgid "Scan options"
 msgstr "Keresési beállítások"
 
@@ -1654,6 +1703,9 @@ msgstr "WiFi socket időtúllépés"
 
 msgid "Enable DoIP Scan"
 msgstr "DoIP szkennelés engedélyezése"
+
+msgid "Enable compatibility detection"
+msgstr "Kompatibilitás-észlelés engedélyezése"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "DoIP (Diagnosztika IP-n keresztül) Konfiguráció (Kísérleti)"

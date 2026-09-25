@@ -116,7 +116,9 @@ cd ddt4all
 python -m venv ./venv
 
 # activate virtual environment
-#   Windows:
+#   Windows (PowerShell):
+.\venv\Scripts\Activate.ps1
+#   Windows (cmd.exe):
 .\venv\Scripts\activate.bat
 #   Linux / macOS:
 source ./venv/bin/activate
@@ -158,6 +160,24 @@ pip install "PyQt5>=5.15,<5.16" "PyQtWebEngine>=5.15,<5.16" pyserial==3.5 pyusb=
   ```
 - **Windows** — ensure the serial/USB drivers are installed and that a COM port is
   assigned to the adapter. Run with administrator rights if port access fails.
+  - `.\venv\Scripts\activate.bat` only works from a `cmd.exe` prompt (it does not
+    change the environment of a parent PowerShell session). From PowerShell, use
+    `.\venv\Scripts\Activate.ps1` instead.
+  - If `Activate.ps1` is refused with a "running scripts is disabled" error, the
+    default PowerShell execution policy is blocking it. Allow it for the current
+    session only (no admin rights required):
+    ```powershell
+    Set-ExecutionPolicy -Scope Process -ExecutionPolicy RemoteSigned
+    ```
+  - `scripts/i18n.py` (regenerating `locales/*.po`/`.pot`/`.mo`) needs the
+    `gettext` command-line tools (`xgettext`, `msgmerge`, `msgattrib`, `msgfmt`),
+    which are **not** installed by `pip`. Install them with
+    [Chocolatey](https://chocolatey.org/) — `choco install gettext` — then open a
+    new terminal so `PATH` is refreshed. If you already have Git for Windows, its
+    bundled `usr\bin` (e.g. `C:\Program Files\Git\usr\bin`) also contains these
+    tools and works as a fallback from a Git Bash shell.
+  - `scripts/gen_qrc.py --compile` needs `pyrcc5`, which ships with `PyQt5` and is
+    already available in the venv after `pip install -e .` — no extra install.
 - **macOS** — if an editable-install error is raised by `pip install -e .`, update the
   packaging tools first:
   ```bash
@@ -187,8 +207,15 @@ correct baud rate. On discovery, the optimal device configuration is applied.
 ```bash
 # Linux / macOS
 alias ddt4all-dev='cd /path/to/ddt4all && source ./venv/bin/activate && python -m ddt4all'
-# Windows (PowerShell)
-Set-Alias -Name ddt4all -Value "ddt4all"
+```
+
+```powershell
+# Windows (PowerShell) — add to your $PROFILE
+function ddt4all-dev {
+    Set-Location D:\path\to\ddt4all
+    .\venv\Scripts\Activate.ps1
+    python -m ddt4all
+}
 ```
 
 ## Plugin system
@@ -264,6 +291,26 @@ pytest
 
 Test suites are in `tests/` (`unit`, `integration`, `smoke`). A GitHub Actions
 workflow (`python-app.yml`) runs the test suite on multiple OSes.
+
+## Development scripts
+
+Utility scripts live under `scripts/` and are run from the repository root with
+the venv active:
+
+```bash
+# regenerate resources.qrc from resources/ and compile it to a Python module
+python scripts/gen_qrc.py --compile
+
+# translations: refresh locales/*.pot and *.po from the source strings, then
+# compile locales/*.po to src/ddt4all/generated/locales/*/LC_MESSAGES/*.mo
+python scripts/i18n.py full-gen
+# individual steps: pot-create, po-merge, po-to-mo (see --help)
+```
+
+`scripts/i18n.py` requires the `gettext` command-line tools — see the Windows
+bullet points under [Platform notes](#platform-notes) if `xgettext`/`msgfmt`
+is not found. `scripts/gen_qrc.py --compile` requires `pyrcc5`, already
+available once `PyQt5` is installed.
 
 ## Distribution / build
 

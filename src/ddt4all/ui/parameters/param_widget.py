@@ -10,6 +10,7 @@ import PyQt5.QtGui as gui
 import PyQt5.QtWidgets as widgets
 
 from ddt4all.core.ecu.ecu_file import EcuFile
+from ddt4all.core.ecu.ecu_sessions import list_diag_sessions
 from ddt4all.core.elm.elm import reconnect_elm
 from ddt4all.core.parameters.helpers import dumpXML
 import ddt4all.options as options
@@ -646,33 +647,12 @@ class ParamWidget(widgets.QWidget):
             self.tester_presend_command = ""
             return
 
-        self.defaultdiagsessioncommand = "10C0"
-
-        options.main_window.sdscombo.addItem("After sales (default) [10C0]")
-        self.sds["After sales (default) [10C0]"] = "10C0"
-
-        # Init startDiagnosticSession combo
-        for reqname, request in self.ecurequestsparser.requests.items():
-            uppername = reqname.upper()
-            if "START" in uppername and "DIAG" in uppername and "SESSION" in uppername:
-                sessionnamefound = False
-                for di in request.sendbyte_dataitems.keys():
-                    dataitemnameupper = di.upper()
-                    if u"SESSION" in dataitemnameupper and u"NAME" in dataitemnameupper:
-                        ecu_data = self.ecurequestsparser.data[di]
-                        for dataname, dataitem in ecu_data.items.items():
-                            datastream = request.build_data_stream({di: dataname})
-                            sdsrequest = ''.join(datastream)
-                            dataname += u" [" + sdsrequest + u"]"
-                            options.main_window.sdscombo.addItem(dataname)
-                            self.sds[dataname] = sdsrequest
-                            sessionnamefound = True
-
-                if len(request.sendbyte_dataitems) == 0 or not sessionnamefound:
-                    sdsrequest = "".join(request.build_data_stream({}))
-                    dataname = reqname + u" [" + sdsrequest + u"]"
-                    options.main_window.sdscombo.addItem(dataname)
-                    self.sds[dataname] = sdsrequest
+        # Init startDiagnosticSession combo from the shared session helper
+        # (same list and same default as the compatibility probe).
+        sessions, self.defaultdiagsessioncommand = list_diag_sessions(self.ecurequestsparser)
+        for dataname, sdsrequest in sessions:
+            options.main_window.sdscombo.addItem(dataname)
+            self.sds[dataname] = sdsrequest
 
         for i in range(0, options.main_window.sdscombo.count()):
             itemname = options.main_window.sdscombo.itemText(i)

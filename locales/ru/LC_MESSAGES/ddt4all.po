@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDT4ALL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-28 19:29+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: \n"
@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: Poedit 3.9\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 
@@ -121,16 +121,16 @@ msgid "DoIP: Using extended addressing for Electric Vehicle Systems"
 msgstr "DoIP: Использование расширенной адресации для систем электромобилей"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
-"DoIP: Использование 29-битной расширенной адресации - TX:0x{:04X}, "
-"RX:0x{:04X}"
+"DoIP: Использование 29-битной расширенной адресации - TX:0x{0:04X}, "
+"RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
 msgstr ""
-"DoIP: Использование 11-битной стандартной адресации - TX:0x{:03X}, "
-"RX:0x{:03X}"
+"DoIP: Использование 11-битной стандартной адресации - TX:0x{0:03X}, "
+"RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Предупреждение, не может получить значение со знаком для"
@@ -188,6 +188,23 @@ msgstr "(не идеальное совпадение)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(соответствующий файл ЭБУ не найден)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Ошибка проверки совместимости: %s"
+
+msgid "Compatibility check"
+msgstr "Проверка совместимости"
+
+msgid "candidate group(s), probing..."
+msgstr "группа(ы) кандидатов, тестирование..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Ошибка теста совместимости: %s"
+
+msgid "Compatibility"
+msgstr "Совместимость"
 
 msgid "Warning, address"
 msgstr "Предупреждение, адрес"
@@ -594,6 +611,9 @@ msgstr "Запись архива"
 
 msgid "Opening ECU Database..."
 msgstr "Открытие базы данных ЭБУ..."
+
+msgid "DataItem not found"
+msgstr "Элемент данных не найден"
 
 msgid "parts as: "
 msgstr "части как: "
@@ -1244,9 +1264,6 @@ msgstr "Запрос не назван"
 msgid "Found similar"
 msgstr "Найдено похожее"
 
-msgid "DataItem not found"
-msgstr "Элемент данных не найден"
-
 msgid "Cannot find data "
 msgstr "Не удается найти данные "
 
@@ -1258,6 +1275,53 @@ msgstr "Не могу сформировать запрос "
 
 msgid "No Value"
 msgstr "Нет значения"
+
+msgid "ECU compatibility check"
+msgstr "Проверка совместимости ЭБУ"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Ни одно определение не соответствует этим ЭБУ. Группы, отмеченные зелёной "
+"галочкой, корректно ответили на тест только для чтения и могут быть "
+"добавлены к обнаруженным ЭБУ."
+
+msgid "Select"
+msgstr "Выбор"
+
+msgid "State"
+msgstr "Состояние"
+
+msgid "ECU"
+msgstr "ЭБУ"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Протокол"
+
+msgid "Diag"
+msgstr "Диаг"
+
+msgid "Soft"
+msgstr "ПО"
+
+msgid "Version"
+msgstr "Версия"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Успешно / Ошибки / Неопределённо"
+
+msgid "Add selection"
+msgstr "Добавить выбранное"
+
+msgid "Close"
+msgstr "Закрыть"
+
+msgid "CAN line"
+msgstr "Линия CAN"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1296,25 +1360,6 @@ msgstr "База данных не найдена"
 
 msgid "Check documentation"
 msgstr "Проверьте документацию"
-
-msgid "DDT4All Documentation"
-msgstr "Документация DDT4All"
-
-msgid "WebEngine not available."
-msgstr "WebEngine недоступен."
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-"Для полной документации с возможностью веб-просмотра, установите "
-"PyQtWebEngine:"
-
-msgid "Visit the online documentation at:"
-msgstr "Посетите онлайн документацию по адресу:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Этот базовый вид все равно будет показывать документацию ЭБУ, когда доступно."
 
 msgid "Refresh rate (ms):"
 msgstr "Частота обновления (ms):"
@@ -1566,6 +1611,9 @@ msgstr "Сканирование KWP"
 msgid "Scanning DoIP"
 msgstr "Сканирование DoIP"
 
+msgid "Added compatible ECU"
+msgstr "Добавлен совместимый ЭБУ"
+
 msgid "Scan options"
 msgstr "Опции сканирования"
 
@@ -1658,6 +1706,9 @@ msgstr "Таймаут сокета WiFi"
 
 msgid "Enable DoIP Scan"
 msgstr "Включить сканирование DoIP"
+
+msgid "Enable compatibility detection"
+msgstr "Включить определение совместимости"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "Конфигурация DoIP (Диагностика по IP) (Экспериментально)"

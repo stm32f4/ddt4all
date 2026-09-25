@@ -52,3 +52,4 @@ coverage.xml
 /scripts/resources.qrc
 *.po~
 ddt4all-*.AppImage
+DDT4ALL-Dist-Versions

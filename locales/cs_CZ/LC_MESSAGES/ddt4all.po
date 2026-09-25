@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDT4ALL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-28 19:27+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: Czech\n"
@@ -117,14 +117,15 @@ msgid "DoIP: Using extended addressing for Electric Vehicle Systems"
 msgstr "DoIP: Použití rozšířeného adresování pro systémy elektrických vozidel"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
-"DoIP: Použití 29-bitového rozšířeného adresování - TX:0x{:04X}, RX:0x{:04X}"
+"DoIP: Použití 29-bitového rozšířeného adresování - TX:0x{0:04X}, RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
 msgstr ""
-"DoIP: Použití 11-bitového standardního adresování - TX:0x{:03X}, RX:0x{:03X}"
+"DoIP: Použití 11-bitového standardního adresování - TX:0x{0:03X}, "
+"RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Varování, nelze získat podepsanou hodnotu pro"
@@ -182,6 +183,23 @@ msgstr "(není dokonalá shoda)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(nebyl nalezen žádný relevantní soubor ECU)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Chyba kontroly kompatibility: %s"
+
+msgid "Compatibility check"
+msgstr "Kontrola kompatibility"
+
+msgid "candidate group(s), probing..."
+msgstr "kandidátní skupina(y), testování..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Chyba testu kompatibility: %s"
+
+msgid "Compatibility"
+msgstr "Kompatibilita"
 
 msgid "Warning, address"
 msgstr "Varování, adresa"
@@ -592,6 +610,9 @@ msgstr "Zápis archivu"
 
 msgid "Opening ECU Database..."
 msgstr "Otevírání databáze ECU..."
+
+msgid "DataItem not found"
+msgstr "Datová položka nenalezena"
 
 msgid "parts as: "
 msgstr "části jako: "
@@ -1238,9 +1259,6 @@ msgstr "Není uveden žádný požadavek"
 msgid "Found similar"
 msgstr "Bylo nalezeno podobné"
 
-msgid "DataItem not found"
-msgstr "Datová položka nenalezena"
-
 msgid "Cannot find data "
 msgstr "Nelze najít data "
 
@@ -1252,6 +1270,52 @@ msgstr "Nelze nakreslit vstup "
 
 msgid "No Value"
 msgstr "Žádná hodnota"
+
+msgid "ECU compatibility check"
+msgstr "Kontrola kompatibility ECU"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Žádná definice neodpovídá těmto ECU. Skupiny označené zeleným zaškrtnutím "
+"správně odpověděly na test pouze pro čtení a lze je přidat k nalezeným ECU."
+
+msgid "Select"
+msgstr "Výběr"
+
+msgid "State"
+msgstr "Stav"
+
+msgid "ECU"
+msgstr "ECU"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Protokol"
+
+msgid "Diag"
+msgstr "Diag"
+
+msgid "Soft"
+msgstr "Software"
+
+msgid "Version"
+msgstr "Verze"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Úspěch / Selhání / Neprůkazné"
+
+msgid "Add selection"
+msgstr "Přidat výběr"
+
+msgid "Close"
+msgstr "Zavřít"
+
+msgid "CAN line"
+msgstr "Linka CAN"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1290,26 +1354,6 @@ msgstr "Zip databáze"
 
 msgid "Check documentation"
 msgstr "Dokumentace"
-
-msgid "DDT4All Documentation"
-msgstr "Dokumentace DDT4All"
-
-msgid "WebEngine not available."
-msgstr "WebEngine není k dispozici."
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-"Pro kompletní dokumentaci s možností prohlížení webu si nainstalujte "
-"PyQtWebEngine:"
-
-msgid "Visit the online documentation at:"
-msgstr "Navštivte online dokumentaci na adrese:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Toto základní zobrazení bude i nadále zobrazovat dokumentaci k řídicí "
-"jednotce motoru (ECU), pokud bude k dispozici."
 
 msgid "Refresh rate (ms):"
 msgstr "Časový limit CAN (ms) [0:AUTO] :"
@@ -1561,6 +1605,9 @@ msgstr "Skenování KWP"
 msgid "Scanning DoIP"
 msgstr "Skenování DoIP"
 
+msgid "Added compatible ECU"
+msgstr "Přidáno kompatibilní ECU"
+
 msgid "Scan options"
 msgstr "Možnosti skenování"
 
@@ -1653,6 +1700,9 @@ msgstr "Časový limit WiFi socketu"
 
 msgid "Enable DoIP Scan"
 msgstr "Povolit skenování DoIP"
+
+msgid "Enable compatibility detection"
+msgstr "Povolit detekci kompatibility"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "Konfigurace DoIP (Diagnostika přes IP) (Experimentální)"

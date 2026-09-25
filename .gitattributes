@@ -1,0 +1,2 @@
+locales/**/*.po text eol=lf
+locales/*.pot text eol=lf

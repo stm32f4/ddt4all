@@ -141,18 +141,18 @@ class DoIPDevice:
             # Electric ECUs and EVC typically use 29-bit addressing
             if TXa > 0x7FF or RXa > 0x7FF:
                 self.doip.extended_29bit = True
-                print(_("DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}") % (TXa, RXa))
+                print(_("DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}").format(TXa, RXa))
             else:
                 self.doip.extended_29bit = False
-                print(_("DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}") % (TXa, RXa))
+                print(_("DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}").format(TXa, RXa))
         else:
             # Configure for 29-bit addressing if needed (newer vehicles)
             if TXa > 0x7FF or RXa > 0x7FF:
                 self.doip.extended_29bit = True
-                print(_("DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}") % (TXa, RXa))
+                print(_("DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}").format(TXa, RXa))
             else:
                 self.doip.extended_29bit = False
-                print(_("DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}") % (TXa, RXa))
+                print(_("DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}").format(TXa, RXa))
 
         self.doip.source_address = TXa
         self.doip.target_address = RXa

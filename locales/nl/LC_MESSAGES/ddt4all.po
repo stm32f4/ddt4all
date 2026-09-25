@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: DDT4ALL\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-06-09 07:56+0200\n"
+"POT-Creation-Date: 2026-09-25 01:10+0200\n"
 "PO-Revision-Date: 2026-05-10 06:28+0200\n"
 "Last-Translator: Furtif <msntchat@hotmail.fr>\n"
 "Language-Team: \n"
@@ -120,14 +120,14 @@ msgstr ""
 "DoIP: Uitgebreide adressering gebruiken voor Elektrische Voertuigsystemen"
 
 #, python-brace-format
-msgid "DoIP: Using 29-bit extended addressing - TX:0x{:04X}, RX:0x{:04X}"
+msgid "DoIP: Using 29-bit extended addressing - TX:0x{0:04X}, RX:0x{1:04X}"
 msgstr ""
-"DoIP: 29-bit uitgebreide adressering gebruiken - TX:0x{:04X}, RX:0x{:04X}"
+"DoIP: 29-bit uitgebreide adressering gebruiken - TX:0x{0:04X}, RX:0x{1:04X}"
 
 #, python-brace-format
-msgid "DoIP: Using 11-bit standard addressing - TX:0x{:03X}, RX:0x{:03X}"
+msgid "DoIP: Using 11-bit standard addressing - TX:0x{0:03X}, RX:0x{1:03X}"
 msgstr ""
-"DoIP: 11-bit standaard adressering gebruiken - TX:0x{:03X}, RX:0x{:03X}"
+"DoIP: 11-bit standaard adressering gebruiken - TX:0x{0:03X}, RX:0x{1:03X}"
 
 msgid "Warning, cannot get signed value for"
 msgstr "Waarschuwing, kan geen waarde met teken krijgen voor"
@@ -185,6 +185,23 @@ msgstr "(niet perfecte overeenkomst)"
 
 msgid "(no relevant ECU file found)"
 msgstr "(geen relevant ECU-bestand gevonden)"
+
+#, python-format
+msgid "Compatibility check error: %s"
+msgstr "Fout bij compatibiliteitscontrole: %s"
+
+msgid "Compatibility check"
+msgstr "Compatibiliteitscontrole"
+
+msgid "candidate group(s), probing..."
+msgstr "kandidaatgroep(en), testen..."
+
+#, python-format
+msgid "Compatibility probe error: %s"
+msgstr "Fout bij compatibiliteitstest: %s"
+
+msgid "Compatibility"
+msgstr "Compatibiliteit"
 
 msgid "Warning, address"
 msgstr "Waarschuwing, adres"
@@ -591,6 +608,9 @@ msgstr "Archief schrijven"
 
 msgid "Opening ECU Database..."
 msgstr "ECU Database openen..."
+
+msgid "DataItem not found"
+msgstr "DataItem niet gevonden"
 
 msgid "parts as: "
 msgstr "onderdelen als: "
@@ -1237,9 +1257,6 @@ msgstr "Geen aanvraag genaamd"
 msgid "Found similar"
 msgstr "Vergelijkbaar gevonden"
 
-msgid "DataItem not found"
-msgstr "DataItem niet gevonden"
-
 msgid "Cannot find data "
 msgstr "Kan data niet vinden "
 
@@ -1251,6 +1268,53 @@ msgstr "Kan aanvraag niet uitvoeren "
 
 msgid "No Value"
 msgstr "Geen waarde"
+
+msgid "ECU compatibility check"
+msgstr "ECU-compatibiliteitscontrole"
+
+msgid ""
+"No definition matched these ECUs. Groups marked with a green tick answered "
+"the read-only probe correctly and can be added to the detected ECUs."
+msgstr ""
+"Geen enkele definitie komt overeen met deze ECU's. Groepen met een groen "
+"vinkje hebben de alleen-lezen test correct beantwoord en kunnen aan de "
+"gedetecteerde ECU's worden toegevoegd."
+
+msgid "Select"
+msgstr "Selectie"
+
+msgid "State"
+msgstr "Status"
+
+msgid "ECU"
+msgstr "ECU"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Protocol"
+msgstr "Protocol"
+
+msgid "Diag"
+msgstr "Diag"
+
+msgid "Soft"
+msgstr "Software"
+
+msgid "Version"
+msgstr "Versie"
+
+msgid "Pass / Fail / Inconclusive"
+msgstr "Geslaagd / Mislukt / Onbeslist"
+
+msgid "Add selection"
+msgstr "Selectie toevoegen"
+
+msgid "Close"
+msgstr "Sluiten"
+
+msgid "CAN line"
+msgstr "CAN-lijn"
 
 msgid ""
 "<center>This Software is free, but I need money to buy cables/ECUs and make "
@@ -1289,25 +1353,6 @@ msgstr "Geen database gevonden"
 
 msgid "Check documentation"
 msgstr "Documentatie controleren"
-
-msgid "DDT4All Documentation"
-msgstr "DDT4All Documentatie"
-
-msgid "WebEngine not available."
-msgstr "WebEngine niet beschikbaar."
-
-msgid ""
-"For full documentation with web browsing capability, install PyQtWebEngine:"
-msgstr ""
-"Voor volledige documentatie met web-browse-mogelijkheid, installeer "
-"PyQtWebEngine:"
-
-msgid "Visit the online documentation at:"
-msgstr "Bezoek de online documentatie op:"
-
-msgid "This basic view will still show ECU documentation when available."
-msgstr ""
-"Deze basis weergave zal nog steeds ECU documentatie tonen indien beschikbaar."
 
 msgid "Refresh rate (ms):"
 msgstr "Verversingstijd (ms):"
@@ -1560,6 +1605,9 @@ msgstr "KWP scannen"
 msgid "Scanning DoIP"
 msgstr "DoIP scannen"
 
+msgid "Added compatible ECU"
+msgstr "Compatibele ECU toegevoegd"
+
 msgid "Scan options"
 msgstr "Scan opties"
 
@@ -1652,6 +1700,9 @@ msgstr "WiFi socket time-out"
 
 msgid "Enable DoIP Scan"
 msgstr "DoIP-scan inschakelen"
+
+msgid "Enable compatibility detection"
+msgstr "Compatibiliteitsdetectie inschakelen"
 
 msgid "DoIP (Diagnostics over IP) Configuration (Experimental)"
 msgstr "DoIP (Diagnostiek via IP) Configuratie (Experimenteel)"
